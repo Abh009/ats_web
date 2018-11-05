@@ -1,17 +1,16 @@
 <?php
 
     function connect_db(){
-        $host = 'localhost';
-        $user = 'test';
-        $password = 'testpwd';
-        $db_name = 'test';
+        $host = 'mysql';
+        $user = 'root';
+        $pass = 'rootpassword';
+        $db_name = 'ats';
+        $conn = new mysqli($host, $user, $pass);
 
-        $con = mysqli_connect( $host, $user, $password, $db_name );
-
-        if ( mysqli_connect_errno() ){
+        if ($conn->connect_error) {
             return 0;
-        }
-        return $con;
+        } 
+        return $conn;
     }
 
 ?>
