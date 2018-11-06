@@ -16,6 +16,7 @@
 
     // authenticate
     $sql = "SELECT * FROM faculties WHERE regno = '$regno' and password = password('$passwrd')";
+
     $result = $con->query( $sql );
 
      if ( $result->num_rows <= 0 ){
