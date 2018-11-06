@@ -12,13 +12,13 @@
 
     // get data sent via POST
     $regno = $_POST['regno'];
-    $password = $_POST['password'];
+    $passwrd = $_POST['password'];
 
     // authenticate
-    $sql = "SELECT * FROM faculties WHERE regno = '$regno' and password = password($password)";
+    $sql = "SELECT * FROM faculties WHERE regno = '$regno' and password = password('$passwrd')";
     $result = $con->query( $sql );
 
-    if ( $result->num_rows <= 0 ){
+     if ( $result->num_rows <= 0 ){
         echo json_encode( array( 'status'=>0, 'text'=>'Incorrect faculty ID or password') );
         exit();
     }
