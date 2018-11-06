@@ -1,9 +1,9 @@
 <?php
 
     function connect_db(){
-        $host = 'mysql';
-        $user = 'root';
-        $pass = 'rootpassword';
+        $host = 'localhost';
+        $user = 'phpmyadmin';
+        $pass = 'root_ats';
         $db_name = 'ats';
         $conn = new mysqli($host, $user, $pass, $db_name );
 
