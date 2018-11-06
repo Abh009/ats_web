@@ -25,7 +25,10 @@
 
     // get faculty details
     while( $row = $result->fetch_assoc() ){
-        $details = array( 'status'=>1, 'text'=>'Sign in successfull', 'regno'=> $row['regno'], 'name'=>$row['name'], 'dept'=>$row['dept'], 'designation'=>$row['designation'] );
+        $details = array( 'status'=>1,
+             'text'=>'Sign in successfull', 'regno'=> $row['regno'], 'name'=>$row['name'],
+              'dept'=>$row['dept'], 'designation'=>$row['designation'], 'email'=> $row['email'],
+                'phone_no'=> $row['phone_no'] );
         echo json_encode( $details );
     }
 
