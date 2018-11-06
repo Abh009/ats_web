@@ -15,7 +15,7 @@
     $password = $_POST['password'];
 
     // authenticate
-    $sql = "SELECT * FROM faculties WHERE regno = '$regno' and password = password($password)";
+    $sql = "SELECT * FROM faculties WHERE regno = '$regno' and password = password('$password')";
     $result = $con->query( $sql );
 
     if ( $result->num_rows <= 0 ){
