@@ -23,7 +23,7 @@ if( $result->num_rows <= 0 ){
 // get today
 $today = (int) date('N');
 
-$hours = array(0,0,0,0,0,0);
+$hours = array("0","0","0","0","0","0");
 
 function get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch ){
     foreach( $timetable as $hour=>$sub ){
