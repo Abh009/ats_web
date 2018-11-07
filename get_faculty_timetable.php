@@ -25,11 +25,11 @@ $today = (int) date('N');
 
 $hours = array(0,0,0,0,0,0);
 
-function get_hours_of_subject( $timetable, $subject ){
+function get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch ){
     foreach( $timetable as $hour=>$sub ){
         if( $sub == $subject ){
             $h = (int) substr( $hour, -1);
-            $hours[ $h - 1 ] = $sub;
+            $GLOBALS['hours'][ $h - 1 ] = $branch.' '.$sem.' '.$batch.' '.$sub;
         }
     }
 }
@@ -41,20 +41,21 @@ while( $row = $result->fetch_assoc() ){
     $subject = $row['subject'];
 
     // get todays timetable for this batch
-    $sql = "SELECT * FROM timetable WHERE weekday = $today and branch = $branch and sem = $sem and batch = $batch";
+    $sql = "SELECT * FROM timetable WHERE weekday = $today and branch ='$branch' and sem = '$sem' and batch = '$batch'";
     $res = $con->query( $sql );
 
     $timetable = $res->fetch_assoc();
-    
+
     // removing unwanted fields
     unset( $timetable['branch']);
     unset( $timetable['batch']);
     unset( $timetable['sem']);
     unset( $timetable['weekday']);
     // now only hour_1, hour_2, ....
+	
 
 
-    get_hours_of_subject( $timetable, $subject );
+    get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
 }
 
 print_r( $hours );
