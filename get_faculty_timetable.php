@@ -58,7 +58,7 @@ while( $row = $result->fetch_assoc() ){
     get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
 }
 
-print_r( $hours );
+echo json_encode( $hours );
 
 
 ?>
