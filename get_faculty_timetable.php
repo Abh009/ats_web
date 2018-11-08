@@ -29,7 +29,8 @@ function get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch ){
     foreach( $timetable as $hour=>$sub ){
         if( $sub == $subject ){
             $h = (int) substr( $hour, -1);
-            $GLOBALS['hours'][ $h - 1 ] = $branch.'\n'.$sem.'\n'.$batch.'\n'.$sub;
+            $j = array( 'branch'=> $branch, 'sem'=>$sem, 'batch'=> $batch, 'sub'=>$sub );
+            $GLOBALS['hours'][ $h - 1 ] = $j;
         }
     }
 }
