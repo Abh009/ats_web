@@ -59,7 +59,38 @@ while( $row = $result->fetch_assoc() ){
     get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
 }
 
-echo json_encode( $hours );
+$todays_timetable = $hours;
+
+
+// get complete timetable also
+$complete_timetable = array("0","0","0","0","0");
+while( $row = $result->fetch_assoc() ){
+    $branch = $row['branch'];
+    $sem = $row['sem'];
+    $batch = $row['batch'];
+    $subject = $row['subject'];
+
+    // get todays timetable for this batch
+    for( $i = 1 ; $i < 6; $i++  ){
+        $hours = array("0","0","0","0","0","0");
+        $sql = "SELECT * FROM timetable WHERE weekday = $i and branch ='$branch' and sem = '$sem' and batch = '$batch'";
+        $res = $con->query( $sql );
+
+        while( $timetable = $res->fetch_assoc() ){
+            // removing unwanted fields
+            unset( $timetable['branch']);
+            unset( $timetable['batch']);
+            unset( $timetable['sem']);
+            unset( $timetable['weekday']);
+            // now only hour_1, hour_2, ....
+            
+            get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
+        }
+        $complete_timetable[ $i - 1 ] = $hours;
+   }
+}
+
+echo json_encode( array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable) );
 
 
 ?>
