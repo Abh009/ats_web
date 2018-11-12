@@ -64,6 +64,11 @@ $todays_timetable = $hours;
 
 // get complete timetable also
 $complete_timetable = array("0","0","0","0","0");
+
+$sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
+$result = $con->query( $sql );
+
+
 while( $row = $result->fetch_assoc() ){
     $branch = $row['branch'];
     $sem = $row['sem'];
