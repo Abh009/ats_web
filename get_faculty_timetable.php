@@ -64,10 +64,10 @@ $todays_timetable = $hours;
 // get alll batches of this faculty
 $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
 $result = $con->query( $sql );
-$batches = new array();
+$batches = [];
 while( $row = $result->fetch_assoc() ){
     unset( $row['faculty_id'] );
-    unset( $row['subject'] )
+    unset( $row['subject'] );
     array_push( $batches, $row );
 }
 
