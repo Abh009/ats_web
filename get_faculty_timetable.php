@@ -61,6 +61,15 @@ while( $row = $result->fetch_assoc() ){
 
 $todays_timetable = $hours;
 
+// get alll batches of this faculty
+$sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
+$result = $con->query( $sql );
+$batches = array();
+while( $row = $result->fetch_assoc() ){
+    unset( $row['faculty_id'] );
+    unset( $row['subject'] )
+    array_push( $batches, $row );
+}
 
 // get complete timetable also
 $complete_timetable = array("0","0","0","0","0");
@@ -95,7 +104,8 @@ while( $row = $result->fetch_assoc() ){
    }
 }
 
-echo json_encode( array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable) );
+
+echo json_encode( array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable, 'batches'=> $batches ) );
 
 
 ?>
