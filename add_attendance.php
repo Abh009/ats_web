@@ -9,7 +9,7 @@
     }
 
     $faculty_id = $_POST['faculty_id'];
-    $absentees_list = json_decode ( $_POST['absentees'] );
+    $absentees_list = $_POST['absentees'] ;
 
     echo $absentees_list;
 ?>
