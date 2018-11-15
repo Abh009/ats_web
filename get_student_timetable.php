@@ -5,7 +5,7 @@ require('db.php');
 $con = connect_db();
 
 if( !isset( $_POST['student_id']) ){
-    echo json_encode( array( 'status'=>0, 'text'=>"Invalid Request") )
+    echo json_encode( array( 'status'=>0, 'text'=>"Invalid Request") );
     exit();
 }
 
