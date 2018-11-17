@@ -5,6 +5,11 @@
     // get faculty id
     $faculty_id = $_POST['faculty_id'];
 
+    if( ! isset( $faculty_id ) ){
+        echo json_encode( array('status'=>0, 'text'=>'Invalid Request'));
+        exit();
+    }
+
     // get all the attendance records of this faculty
     $sql = "SELECT * FROM attendance WHERE faculty_id = '$faculty_id' ";
     $result = $con->query( $sql );
@@ -19,6 +24,14 @@
         // $sql = "SELECT * FROM student WHERE admno = '$student_id'";
         $result = $con->query( $sql );
         $student_details = $result->fetch_assoc();
+
+        $attended = $student_details['attended'];
+        $total = $student_details['total'];
+        $percentage = $attended / $total * 100;
+
+        if( $percentage >= 75 ){
+            continue;
+        }
 
         $sql = "SELECT * FROM teaches_at WHERE ";
         // TODO
