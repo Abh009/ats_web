@@ -41,8 +41,13 @@
         $result = $con->query( $sql );
         $row = $result->fetch_assoc();
 
-        $attended = $row['attended'] + 1;
-        $total = $row['total'] + 1;
+        $attended = 1;
+        $total = 1;
+        if( $result->num_rows != 0 )
+        {
+            $attended = $row['attended'] + 1;
+            $total = $row['total'] + 1;
+        }
 
         // update 
         $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject'";
