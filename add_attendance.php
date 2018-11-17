@@ -23,6 +23,7 @@
 
     // get student list
     $students = explode( " ", $absentees_list );
+    print_r( $students);
 
     foreach( $students as $student ){
         // get the student id
