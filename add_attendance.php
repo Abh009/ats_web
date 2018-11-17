@@ -39,12 +39,12 @@
         // get current
         $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and $subject = '$subject'";
         $result = $con->query( $sql );
-        $row = $result->fetch_assoc();
 
         $attended = 1;
         $total = 1;
         if( $result->num_rows != 0 )
         {
+            $row = $result->fetch_assoc();
             $attended = $row['attended'] + 1;
             $total = $row['total'] + 1;
         }
