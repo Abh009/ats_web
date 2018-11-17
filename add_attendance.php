@@ -52,6 +52,7 @@
         }
 
         // update 
+        echo $sql;
         $result = $con->query( $sql );
 
     }
