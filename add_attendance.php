@@ -34,6 +34,20 @@
         // mark the attendance
         $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject', '$faculty_id' )";
         $result = $con->query( $sql );
+
+        // update total also
+        // get current
+        $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and $subject = '$subject'";
+        $result = $con->query( $sql );
+        $row = $result->fetch_assoc();
+
+        $attended = $row['attended'] + 1;
+        $total = $row['total'] + 1;
+
+        // update 
+        $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject'";
+        $result = $con->query( $sql );
+
     }
 
     echo json_encode( array( 'status'=>1 ));
