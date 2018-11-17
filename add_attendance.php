@@ -48,7 +48,7 @@
             $row = $result->fetch_assoc();
             $attended = $row['attended'] + 1;
             $total = $row['total'] + 1;
-            $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject')";
+            $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject'";
         }
 
         // update or insert
