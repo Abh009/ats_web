@@ -32,7 +32,7 @@
         $student_id = $row['admno'];
 
         // mark the attendance
-        $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject' )";
+        $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject', '$faculty_id' )";
         $result = $con->query( $sql );
     }
 
