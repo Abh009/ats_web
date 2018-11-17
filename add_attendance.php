@@ -43,7 +43,7 @@
         $attended = 1;
         $total = 1;
         $sql = "INSERT INTO total_attendance VALUES('$student_id', $attended, $total, '$subject', '$faculty_id')";
-        if( $result->num_rows != 0 )
+        if( $result->num_rows > 0 )
         {
             $row = $result->fetch_assoc();
             $attended = $row['attended'] + 1;
@@ -51,7 +51,7 @@
             $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject')";
         }
 
-        // update 
+        // update or insert
         $result = $con->query( $sql );
 
     }
