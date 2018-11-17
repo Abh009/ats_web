@@ -23,13 +23,13 @@
 
     // get student list
     $students = explode( " ", $absentees_list );
-    print_r( $students);
 
     foreach( $students as $student ){
         // get the student id
-        $sql = "SELECT * FROM student WHERE branch = '$batch' and sem = '$sem' and batch = '$batch' and rollno = $student ";
+        $sql = "SELECT * FROM student WHERE branch = '$branch' and sem = '$sem' and batch = '$batch' and rollno = $student ";
         $result = $con->query( $sql );
-        $student_id = $result->fetch_assoc()['admno'];
+        $row = $result->fetch_assoc();
+        $student_id = $row['admno'];
 
         // mark the attendance
         $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject' )";
