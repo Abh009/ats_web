@@ -31,7 +31,7 @@
         $student_id = $result->fetch_assoc()['admno'];
 
         // mark the attendance
-        $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, $subject )";
+        $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject' )";
         $result = $con->query( $sql );
     }
 
