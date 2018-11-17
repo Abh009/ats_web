@@ -24,6 +24,13 @@
     // get student list
     $students = explode( " ", $absentees_list );
 
+    // get all students list
+    $rollist = $con->query( "SELECT count(rollno) as count FROM student");
+    $count = $rollist->fetch_assoc();
+    $count = $count['count'];
+    
+    // TODO
+
     foreach( $students as $student ){
         // get the student id
         $sql = "SELECT * FROM student WHERE branch = '$branch' and sem = '$sem' and batch = '$batch' and rollno = $student ";
@@ -34,7 +41,16 @@
         // mark the attendance
         $sql = "INSERT INTO attendance VALUES( '$student_id', CURRENT_DATE(), 0, '$subject', '$faculty_id' )";
         $result = $con->query( $sql );
+    }
 
+    for( $i = 1; $i <= $count; $i++ ){
+        if( in_array( $i, $students ) )
+            continue;
+        
+        $student_id = $con->query( "SELECT admno FROM student WHERE rollno = $i");
+        $student_id = $student_id->fetch_assoc();
+        $student_id = $student_id['admno'];
+        
         // update total also
         // get current
         $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and $subject = '$subject'";
@@ -53,8 +69,7 @@
 
         // update or insert
         $result = $con->query( $sql );
-
+        
     }
-
     echo json_encode( array( 'status'=>1 ));
 ?>
