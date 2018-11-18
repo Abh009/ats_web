@@ -21,8 +21,8 @@
         $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id WHERE s.admno = '$student_id'";
         
         // $sql = "SELECT * FROM student WHERE admno = '$student_id'";
-        $result = $con->query( $sql );
-        $student_details = $result->fetch_assoc();
+        $res = $con->query( $sql );
+        $student_details = $res->fetch_assoc();
 
         $attended = $student_details['attended'];
         $total = $student_details['total'];
@@ -45,7 +45,6 @@
 
             array_push( $students_with_shortage, $student );
         }
-        print_r( $result->fetch_assoc() );
     }
     
     echo json_encode( $students_with_shortage );
