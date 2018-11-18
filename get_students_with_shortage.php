@@ -45,6 +45,7 @@
 
             array_push( $students_with_shortage, $student );
         }
+        print_r( $result->fetch_assoc() );
     }
     
     echo json_encode( $students_with_shortage );
