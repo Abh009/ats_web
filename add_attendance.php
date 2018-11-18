@@ -54,13 +54,16 @@
         
         // update total also
         // get current
-        $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and $subject = '$subject'";
+        $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and subject = '$subject'";
         $result = $con->query( $sql );
 
         $total = 1;
         $sql = "INSERT INTO total_attendance VALUES('$student_id', $is_attended, $total, '$subject', '$faculty_id')";
-        echo "row num $result->num_rows";
-        if( $result->num_rows > 0 )
+        
+        $row_count = $result->num_rows;
+        echo "row num $row_count";
+
+        if( $row_count > 0 )
         {
             echo "updated $i";
             $row = $result->fetch_assoc();
