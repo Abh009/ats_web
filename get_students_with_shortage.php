@@ -27,7 +27,7 @@
         $attended = $student_details['attended'];
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
-        
+        echo "percentage : $percentage";
         if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
