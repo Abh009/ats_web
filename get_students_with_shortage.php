@@ -17,6 +17,7 @@
     echo "num rows $result->num_rows";
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
+        echo "loop";
         $student = array();
         $student_id = $row['student_id'];
 
