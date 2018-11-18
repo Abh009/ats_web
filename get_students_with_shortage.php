@@ -14,10 +14,8 @@
     $sql = "SELECT * FROM attendance WHERE faculty_id = '$faculty_id' ";
     $result = $con->query( $sql );
 
-    echo "num rows $result->num_rows";
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
-        echo "loop";
         $student = array();
         $student_id = $row['student_id'];
 
@@ -31,7 +29,6 @@
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
         
-        echo "percent: $percentage";
         if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
