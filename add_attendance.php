@@ -61,11 +61,9 @@
         $sql = "INSERT INTO total_attendance VALUES('$student_id', $is_attended, $total, '$subject', '$faculty_id')";
         
         $row_count = $result->num_rows;
-        echo "row num $row_count";
 
         if( $row_count > 0 )
         {
-            echo "updated $i";
             $row = $result->fetch_assoc();
             $attended = $row['attended'] + $is_attended;
             $total = $row['total'] + 1;
