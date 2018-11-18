@@ -44,9 +44,9 @@
     }
 
     for( $i = 1; $i <= $count; $i++ ){
+        $is_attended = 1
         if( in_array( $i, $students ) ){
-            echo "continues $i";
-            continue;
+            $is_attended = 0;
         }
         
         $student_id = $con->query( "SELECT admno FROM student WHERE rollno = $i");
@@ -58,14 +58,13 @@
         $sql = "SELECT * FROM total_attendance WHERE student_id = '$student_id' and $subject = '$subject'";
         $result = $con->query( $sql );
 
-        $attended = 1;
         $total = 1;
-        $sql = "INSERT INTO total_attendance VALUES('$student_id', $attended, $total, '$subject', '$faculty_id')";
+        $sql = "INSERT INTO total_attendance VALUES('$student_id', $is_attended, $total, '$subject', '$faculty_id')";
         if( $result->num_rows > 0 )
         {
             echo "updated $i";
             $row = $result->fetch_assoc();
-            $attended = $row['attended'] + 1;
+            $attended = $row['attended'] + $is_attended;
             $total = $row['total'] + 1;
             $sql = "UPDATE total_attendance SET attended = $attended, total = $total WHERE student_id = '$student_id' and subject = '$subject'";
         }
