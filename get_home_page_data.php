@@ -5,7 +5,7 @@
         $con = connect_db();
 
         // get faculty id
-        $faculty_id = $_POST['faculty_id'];
+        $faculty_id = $_POST['regno'];
 
         if( ! isset( $faculty_id ) ){
             echo json_encode( array('status'=>0, 'text'=>'Invalid Request'));
