@@ -31,7 +31,7 @@
         $percentage = $attended / $total * 100;
 
         if( $percentage >= 75 ){
-            echo 'continued';
+            echo "continued $student_id";
             continue;
         }
 
