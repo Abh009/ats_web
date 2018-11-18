@@ -32,6 +32,7 @@
         $percentage = $attended / $total * 100;
 
         if( $percentage < 75 ){
+            echo "under";
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
 
