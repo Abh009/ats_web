@@ -24,15 +24,14 @@
         $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id WHERE s.admno = '$student_id'";
         
         // $sql = "SELECT * FROM student WHERE admno = '$student_id'";
-        echo "query ?";
         $result = $con->query( $sql );
-        echo "query ok";
         $student_details = $result->fetch_assoc();
 
         $attended = $student_details['attended'];
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
-
+        
+        echo "percent: $percentage";
         if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
