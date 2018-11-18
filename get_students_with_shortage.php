@@ -16,7 +16,6 @@
 
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
-        $student = array();
         $student_id = $row['student_id'];
 
         $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id WHERE s.admno = '$student_id'";
@@ -32,8 +31,8 @@
         if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
-
-            $student['student_id'] = $student_id;
+            
+            $student = array( 'student_id'=> $student_id );
             $student['name'] = $student_details['name'];
             $student['email'] = $student_details['email'];
             $student['branch'] = $student_details['branch'];
