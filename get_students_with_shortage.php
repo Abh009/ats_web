@@ -14,6 +14,7 @@
     $sql = "SELECT * FROM attendance WHERE faculty_id = '$faculty_id' ";
     $result = $con->query( $sql );
 
+    echo "num rows $result->num_rows";
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
         $student = array();
