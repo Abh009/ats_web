@@ -59,6 +59,7 @@
 
         $total = 1;
         $sql = "INSERT INTO total_attendance VALUES('$student_id', $is_attended, $total, '$subject', '$faculty_id')";
+        echo "row num $result->num_rows";
         if( $result->num_rows > 0 )
         {
             echo "updated $i";
