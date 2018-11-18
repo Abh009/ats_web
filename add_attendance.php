@@ -44,10 +44,9 @@
     }
 
     for( $i = 1; $i <= $count; $i++ ){
-        $is_attended = 1
-        if( in_array( $i, $students ) ){
+        $is_attended = 1;
+        if( in_array( (string) $i, $students ) )
             $is_attended = 0;
-        }
         
         $student_id = $con->query( "SELECT admno FROM student WHERE rollno = $i");
         $student_id = $student_id->fetch_assoc();
