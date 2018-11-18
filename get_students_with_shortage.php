@@ -17,6 +17,7 @@
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
         $student_id = $row['student_id'];
+        echo "student: $student_id";
 
         $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id WHERE s.admno = '$student_id'";
         
