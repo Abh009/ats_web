@@ -17,7 +17,6 @@
     $students_with_shortage = array();
     while( $row = $result->fetch_assoc() ){
         $student_id = $row['student_id'];
-        echo "student: $student_id";
 
         
         // $sql = "SELECT * FROM student WHERE admno = '$student_id'";
