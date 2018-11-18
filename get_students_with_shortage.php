@@ -31,26 +31,23 @@
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
 
-        if( $percentage >= 75 ){
-            echo "continued $student_id";
-            continue;
+        if( $percentage < 75 ){
+            $sql = "SELECT * FROM teaches_at WHERE ";
+            // TODO
+
+            $student['student_id'] = $student_id;
+            $student['name'] = $student_details['name'];
+            $student['email'] = $student_details['email'];
+            $student['branch'] = $student_details['branch'];
+            $student['sem'] = $student_details['sem'];
+            $student['batch'] = $student_details['batch'];
+            $student['attended'] = $student_details['attended'];
+            $student['total'] = $student_details['total'];
+            
+            print_r( $student );
+
+            array_push( $students_with_shortage, $student );
         }
-
-        $sql = "SELECT * FROM teaches_at WHERE ";
-        // TODO
-
-        $student['student_id'] = $student_id;
-        $student['name'] = $student_details['name'];
-        $student['email'] = $student_details['email'];
-        $student['branch'] = $student_details['branch'];
-        $student['sem'] = $student_details['sem'];
-        $student['batch'] = $student_details['batch'];
-        $student['attended'] = $student_details['attended'];
-        $student['total'] = $student_details['total'];
-        
-        print_r( $student );
-
-        array_push( $students_with_shortage, $student );
     }
     
     echo json_encode( $students_with_shortage );
