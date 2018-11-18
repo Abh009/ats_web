@@ -28,7 +28,7 @@
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
         
-        if( $percentage < 75 ){
+        // if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
             
@@ -44,7 +44,7 @@
             print_r( $student );
 
             array_push( $students_with_shortage, $student );
-        }
+        // }
     }
     
     echo json_encode( $students_with_shortage );
