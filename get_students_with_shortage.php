@@ -11,7 +11,7 @@
     }
 
     // get all the attendance records of this faculty
-    $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id WHERE s.admno = '$student_id'";
+    $sql = "SELECT * FROM student s JOIN total_attendance t ON s.admno = t.student_id";
     $result = $con->query( $sql );
 
     $students_with_shortage = array();
