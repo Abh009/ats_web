@@ -27,7 +27,7 @@
         $attended = $student_details['attended'];
         $total = $student_details['total'];
         $percentage = $attended / $total * 100;
-        echo "percentage : $percentage";
+        
         if( $percentage < 75 ){
             $sql = "SELECT * FROM teaches_at WHERE ";
             // TODO
@@ -40,8 +40,6 @@
             $student['batch'] = $student_details['batch'];
             $student['attended'] = $student_details['attended'];
             $student['total'] = $student_details['total'];
-            
-            print_r( $student );
 
             array_push( $students_with_shortage, $student );
         }
