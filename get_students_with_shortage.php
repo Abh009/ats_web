@@ -46,6 +46,8 @@
         $student['batch'] = $student_details['batch'];
         $student['attended'] = $student_details['attended'];
         $student['total'] = $student_details['total'];
+        
+        print_r( $student );
 
         array_push( $students_with_shortage, $student );
     }
