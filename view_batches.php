@@ -1,10 +1,9 @@
 <?php
-    echo "-2";
-    require('db.php');
-    echo "-1";
-    $con = connect_db();
-    echo "0";
 
+    require('db.php');
+    $con = connect_db();
+    echo "connected";
+    exit();
     // get batch
     $branch = $_POST['branch'];
     $sem = $_POST['sem'];
