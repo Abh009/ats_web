@@ -20,12 +20,11 @@
     $row = $result->fetch_assoc();
     $subject = $row['subject'];
 
-    echo "2";
-
-
     // get the attendance for the batch
     $sql = "SELECT * FROM total_attendance WHERE subject='$subject' and faculty_id = '$faculty_id'";
     $result = $con->query( $sql );
+
+    echo "3";
 
     $arr = array();
     while( $row = $result->fetch_assoc() ){
@@ -36,7 +35,7 @@
 
         $sql = "SELECT * FROM student WHERE admno = '$student_id'";
         $result = $con->query( $sql );
-        $row = $result->fetch->assoc();
+        $row = $result->fetch_assoc();
         $student_name = $row['name'];
         array_push( $arr, array( 'name'=> $student_name, 'attended'=>$attended, 'total'=>$total ));
     }
