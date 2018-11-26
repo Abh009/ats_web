@@ -12,12 +12,15 @@
         echo json_encode( array( 'status'=>0, 'text'=>'Invalid request'));
         exit();
     }
+    echo "1";
 
     // get subject
     $sql = "SELECT * FROM teaches_at WHERE branch = '$branch' and sem = '$sem' and batch = $batch";
     $result = $con->query( $sql );
     $row = $result->fetch_assoc();
     $subject = $row['subject'];
+
+    echo "2";
 
     // get the attendance for the batch
     $sql = "SELECT * FROM total_attendance WHERE subject='$subject' and faculty_id = '$faculty_id'";
