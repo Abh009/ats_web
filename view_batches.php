@@ -24,8 +24,6 @@
     $sql = "SELECT * FROM total_attendance WHERE subject='$subject' and faculty_id = '$faculty_id'";
     $result = $con->query( $sql );
 
-    echo "3";
-
     $arr = array();
     while( $row = $result->fetch_assoc() ){
         // get student details
@@ -34,9 +32,9 @@
         $total = $row['total'];
 
         $sql = "SELECT * FROM student WHERE admno = '$student_id'";
-        $result = $con->query( $sql );
-        $row = $result->fetch_assoc();
-        $student_name = $row['name'];
+        $result1 = $con->query( $sql );
+        $row1 = $result1->fetch_assoc();
+        $student_name = $row1['name'];
         array_push( $arr, array( 'name'=> $student_name, 'attended'=>$attended, 'total'=>$total ));
     }
     echo json_encode( array( 'status'=>1, 'array'=> $arr) );
