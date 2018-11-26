@@ -41,5 +41,5 @@
         $student_name = $row['name'];
         array_push( $arr, array( 'name'=> $student_name, 'attended'=>$attended, 'total'=>$total ));
     }
-    echo json_encode( array( 'status'=>1, 'array'=> $arr );
+    echo json_encode( array( 'status'=>1, 'array'=> $arr) );
 ?>
