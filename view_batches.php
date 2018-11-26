@@ -1,6 +1,7 @@
 <?php
     require('db.php');
     $con = connect_db();
+    echo "0";
 
     // get batch
     $branch = $_POST['branch'];
