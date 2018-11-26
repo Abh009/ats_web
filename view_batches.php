@@ -1,4 +1,5 @@
 <?php
+    echo "-2";
     require('db.php');
     echo "-1";
     $con = connect_db();
