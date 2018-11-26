@@ -8,6 +8,11 @@
     $batch = $_POST['batch'];
     $faculty_id = $_POST['faculty_id'];
 
+    if( ! isset( $branch ) || ! isset( $sem ) || ! isset( $batch ) || ! isset( $faculty_id ) ){
+        echo json_encode( array( 'status'=>0, 'text'=>'Invalid request'));
+        exit();
+    }
+
     // get subject
     $sql = "SELECT * FROM teaches_at WHERE branch = '$branch' and sem = '$sem' and batch = $batch";
     $result = $con->query( $sql );
@@ -31,5 +36,5 @@
         $student_name = $row['name'];
         array_push( $arr, array( 'name'=> $student_name, 'attended'=>$attended, 'total'=>$total ));
     }
-    echo json_encode( $arr );
+    echo json_encode( array( 'status'=>1, 'array'=> $arr );
 ?>
