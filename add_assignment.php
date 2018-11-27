@@ -10,7 +10,7 @@
     $topic = $_POST['topic'];
     $date_of_subm = $_POST['date'];
 
-    if( !isset( $faculty_id ) || ! isset( $branch ) || ! isset( $sem ) || ! isset( $batch ) || ! isset( $title ) || ! isset( $content ) ){
+    if( !isset( $faculty_id ) || ! isset( $branch ) || ! isset( $sem ) || ! isset( $batch ) || ! isset( $topic ) || ! isset( $date_of_subm ) ){
         echo json_encode( array( 'status'=>0, 'text'=>'Invalid Request' ) );
         exit();
     }
