@@ -24,6 +24,8 @@
     $row = $result->fetch_assoc();
     $subject = $row['subject'];
 
+    $date_of_subm = date( 'Y-m-d', strtotime( $date_of_subm ));
+
     // create a notification
     $sql = "INSERT INTO assignment VALUES( '$faculty_id', '$branch', '$sem', $batch, '$subject', '$topic', CURDATE() )";
     $result = $con->query( $sql );
