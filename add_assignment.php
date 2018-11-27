@@ -25,7 +25,7 @@
     $subject = $row['subject'];
 
     // create a notification
-    $sql = "INSERT INTO assignment VALUES( '$faculty_id', '$branch', '$sem', $batch, '$subject', '$topic', $date_of_subm )";
+    $sql = "INSERT INTO assignment VALUES( '$faculty_id', '$branch', '$sem', $batch, '$subject', '$topic', CURDATE() )";
     $result = $con->query( $sql );
 
     echo json_encode( array( 'status'=>1, 'text'=>'Assignment added'));
