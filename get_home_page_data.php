@@ -158,5 +158,30 @@
     $students_with_shortage = get_students_with_shortage();
 
     $faculty_timetable['students_with_shortage'] = $students_with_shortage;
+
+    // get all notifications too ( datewise )
+    $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
+    $result = $con->query( $sql );
+
+    $notifications = array();
+    while( $row = $result->fetch_assoc() ){
+        $faculty_id = $row['faculty_id'];
+
+        $sql = "SELECT * FROM faculties WHERE regno = '$faculty_id'";
+        $res = $con->query( $sql );
+        $details = $res->fetch_assoc();
+        
+        $fac_name = $details['name'];
+        $desig = $details['designation'];
+        $dept = $details['dept'];
+
+        $row['faculty_name'] = $fac_name;
+        $row['designation'] = $desig;
+        $row['dept'] = $dept;
+
+        array_push( $notifications, $row );
+    }
+
+    $faculty_timetable['notifications'] = $notifications;
     echo json_encode( $faculty_timetable );
 ?>
