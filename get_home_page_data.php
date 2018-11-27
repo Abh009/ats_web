@@ -162,9 +162,11 @@
     // get all notifications too ( datewise )
     $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
     $result = $con->query( $sql );
+    echo "1";
 
     $notifications = array();
     while( $row = $result->fetch_assoc() ){
+        echo "loop";
         $faculty_id = $row['faculty_id'];
 
         $sql = "SELECT * FROM faculties WHERE regno = '$faculty_id'";
@@ -180,6 +182,7 @@
         $row['dept'] = $dept;
 
         array_push( $notifications, $row );
+        echo "added";
     }
 
     $faculty_timetable['notifications'] = $notifications;
