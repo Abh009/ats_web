@@ -27,7 +27,7 @@
     $date_of_subm = date( 'Y-m-d', strtotime( $date_of_subm ));
 
     // create a notification
-    $sql = "INSERT INTO assignment VALUES( '$faculty_id', '$branch', '$sem', $batch, '$subject', '$topic', CURDATE() )";
+    $sql = "INSERT INTO assignment VALUES( '$faculty_id', '$branch', '$sem', $batch, '$subject', '$topic', $date_of_subm )";
     $result = $con->query( $sql );
 
     echo json_encode( array( 'status'=>1, 'text'=>'Assignment added'));
