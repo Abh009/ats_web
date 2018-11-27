@@ -161,7 +161,7 @@
 
     $con = connect_db();
     // get all notifications too ( datewise )
-    $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
+    $sql = "SELECT * FROM notifications ORDER BY date_added";
     $result = $con->query( $sql );
 
     $notifications = array();
