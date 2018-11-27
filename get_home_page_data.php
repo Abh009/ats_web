@@ -160,9 +160,9 @@
     $faculty_timetable['students_with_shortage'] = $students_with_shortage;
 
     // // get all notifications too ( datewise )
-    // $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
-    // $result = $con->query( $sql );
-    // echo "1";
+    $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
+    $result = $con->query( $sql );
+    echo "1";
 
     // $notifications = array();
     // while( $row = $result->fetch_assoc() ){
