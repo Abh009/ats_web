@@ -19,5 +19,5 @@
     $sql = "INSERT INTO notifications(title, content, branch, sem, batch, faculty_id) VALUES( '$title', '$content', '$branch', '$sem', '$batch', '$faculty_id' )";
     $result = $con->query( $sql );
 
-    echo json_encode( array( 'status'=>0, 'text'=>'Notification added'));
+    echo json_encode( array( 'status'=>1, 'text'=>'Notification added'));
 ?>
