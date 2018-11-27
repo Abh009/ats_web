@@ -179,7 +179,7 @@
         $row['faculty_name'] = $fac_name;
         $row['designation'] = $desig;
         $row['dept'] = $dept;
-        $row['date_added'] = date( "d-m-Y", $row['date_added']);
+        $row['date_added'] = date( "d-m-Y", strtotime( $row['date_added'] ));
 
         array_push( $notifications, $row );
     }
