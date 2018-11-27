@@ -16,7 +16,7 @@
     }
 
     // create a notification
-    $sql = "INSERT INTO notifications(title, content, branch, sem, batch, faculty_id) VALUES( '$title', '$content', '$branch', '$sem', '$batch', '$faculty_id' )";
+    $sql = "INSERT INTO notifications(title, content, branch, sem, batch, faculty_id, date_added) VALUES( '$title', '$content', '$branch', '$sem', '$batch', '$faculty_id', CURDATE() )";
     $result = $con->query( $sql );
 
     echo json_encode( array( 'status'=>1, 'text'=>'Notification added'));
