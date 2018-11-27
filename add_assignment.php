@@ -25,7 +25,7 @@
     $subject = $row['subject'];
 
     echo $date_of_subm;
-    $date_of_subm = date( 'd-m-Y', strtotime( $date_of_subm ));
+    $date_of_subm = date( 'Y-m-d', strtotime( $date_of_subm ));
     echo $date_of_subm;
 
     // create a notification
