@@ -1,6 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     require('db.php');
     
     function get_students_with_shortage(){
@@ -165,29 +163,28 @@
     // get all notifications too ( datewise )
     $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
     $result = $con->query( $sql );
-    echo "1";
 
-    // $notifications = array();
-    // while( $row = $result->fetch_assoc() ){
-    //     echo "loop";
-    //     $faculty_id = $row['faculty_id'];
+    $notifications = array();
+    while( $row = $result->fetch_assoc() ){
+        echo "loop";
+        $faculty_id = $row['faculty_id'];
 
-    //     $sql = "SELECT * FROM faculties WHERE regno = '$faculty_id'";
-    //     $res = $con->query( $sql );
-    //     $details = $res->fetch_assoc();
+        $sql = "SELECT * FROM faculties WHERE regno = '$faculty_id'";
+        $res = $con->query( $sql );
+        $details = $res->fetch_assoc();
         
-    //     $fac_name = $details['name'];
-    //     $desig = $details['designation'];
-    //     $dept = $details['dept'];
+        $fac_name = $details['name'];
+        $desig = $details['designation'];
+        $dept = $details['dept'];
 
-    //     $row['faculty_name'] = $fac_name;
-    //     $row['designation'] = $desig;
-    //     $row['dept'] = $dept;
+        $row['faculty_name'] = $fac_name;
+        $row['designation'] = $desig;
+        $row['dept'] = $dept;
 
-    //     array_push( $notifications, $row );
-    //     echo "added";
-    // }
+        array_push( $notifications, $row );
+        echo "added";
+    }
 
-    // $faculty_timetable['notifications'] = $notifications;
+    $faculty_timetable['notifications'] = $notifications;
     echo json_encode( $faculty_timetable );
 ?>
