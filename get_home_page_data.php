@@ -2,7 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     require('db.php');
-
+    
     function get_students_with_shortage(){
         $con = connect_db();
 
@@ -161,6 +161,7 @@
 
     $faculty_timetable['students_with_shortage'] = $students_with_shortage;
 
+    $con = connect_db();
     // get all notifications too ( datewise )
     $sql = "SELECT * FROM notifications ORDER BY date_added DESC";
     $result = $con->query( $sql );
