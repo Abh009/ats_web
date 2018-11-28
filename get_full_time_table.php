@@ -31,6 +31,10 @@
             $sem = $row['sem'];
             $batch = $row['batch'];
             $weekday = (int) $row['weekday'];
+
+            if( $t[ $weekday - 1] != "0"){
+                $today = $t[ $weekday - 1];
+            }
             
             unset( $row['weekday']);
             unset( $row['branch']);
