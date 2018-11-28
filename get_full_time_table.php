@@ -45,7 +45,7 @@
             }
             $t[ $weekday ] = $today;
         }
-        echo json_encode( $t );
+        return $t;
 
     }
     function is_in_subjects( $subject, $subjects ){

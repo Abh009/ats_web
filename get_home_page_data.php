@@ -47,6 +47,62 @@
         }
         return $students_with_shortage;
     }      
+
+    function get_full_timetable(){
+        $conn = connect_db();
+
+        $faculty_id = $_POST['regno'];
+        if( ! isset( $faculty_id ) ){
+            return 0;
+        }
+
+        $t = [ "0", "0", "0", "0", "0" ];
+        $subjects = [];
+
+        // get all subjects
+        $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$faculty_id'";
+        $result = $conn->query( $sql );
+
+        while( $row = $result->fetch_assoc() ){
+            array_push( $subjects, $row );
+        }
+
+        // get entire time table 
+        $sql = "SELECT * FROM timetable";
+        $result = $conn->query( $sql );
+        // find my hours from that and fill out t
+        while( $row = $result->fetch_assoc() ){
+            $today = ["0", "0", "0", "0", "0", "0"];
+            $branch = $row['branch'];
+            $sem = $row['sem'];
+            $batch = $row['batch'];
+            $weekday = $row['weekday'];
+            
+            unset( $row['weekday']);
+            unset( $row['branch']);
+            unset( $row['sem']);
+            unset( $row['batch']);
+
+            foreach( $row as $hour=>$sub ){
+                if( is_in_subjects( $sub, $subjects )){
+                    $h = substr( $hour, -1 );
+                    $today[ $h - 1 ] = array( 'branch'=>$branch, 'sem'=>$sem, 'batch'=>$batch, 'subject'=>$sub );
+                }
+            }
+            $t[ $weekday ] = $today;
+        }
+        return $t;
+
+    }
+    function is_in_subjects( $subject, $subjects ){
+        foreach( $subjects as $sub ){
+            if( $sub['subject'] == $subject ){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     
     function get_faculty_timetable(){
         $con = connect_db();
@@ -119,45 +175,45 @@
         }
     
         // get complete timetable also
-        $complete_timetable = array("0","0","0","0","0");
     
-        $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
-        $result = $con->query( $sql );
+    //     $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
+    //     $result = $con->query( $sql );
     
     
-        while( $row = $result->fetch_assoc() ){
-            $branch = $row['branch'];
-            $sem = $row['sem'];
-            $batch = $row['batch'];
-            $subject = $row['subject'];
+    //     while( $row = $result->fetch_assoc() ){
+    //         $branch = $row['branch'];
+    //         $sem = $row['sem'];
+    //         $batch = $row['batch'];
+    //         $subject = $row['subject'];
     
-            // get todays timetable for this batch
-            for( $i = 1 ; $i < 6; $i++  ){
-                $sql = "SELECT * FROM timetable WHERE weekday = $i and branch ='$branch' and sem = '$sem' and batch = '$batch'";
-                $res = $con->query( $sql );
+    //         // get todays timetable for this batch
+    //         for( $i = 1 ; $i < 6; $i++  ){
+    //             $sql = "SELECT * FROM timetable WHERE weekday = $i and branch ='$branch' and sem = '$sem' and batch = '$batch'";
+    //             $res = $con->query( $sql );
                 
-                $GLOBALS['hours'] = array("0","0","0","0","0","0");
-                while( $timetable = $res->fetch_assoc() ){
-                    // removing unwanted fields
-                    unset( $timetable['branch']);
-                    unset( $timetable['batch']);
-                    unset( $timetable['sem']);
-                    unset( $timetable['weekday']);
-                    // now only hour_1, hour_2, ....
+    //             $GLOBALS['hours'] = array("0","0","0","0","0","0");
+    //             while( $timetable = $res->fetch_assoc() ){
+    //                 // removing unwanted fields
+    //                 unset( $timetable['branch']);
+    //                 unset( $timetable['batch']);
+    //                 unset( $timetable['sem']);
+    //                 unset( $timetable['weekday']);
+    //                 // now only hour_1, hour_2, ....
                     
-                    get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
-                }
-                $complete_timetable[ $i - 1 ] = $GLOBALS['hours'];
-                print_r( $complete_timetable );
-            }
+    //                 get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
+    //             }
+    //             $complete_timetable[ $i - 1 ] = $GLOBALS['hours'];
+    //             print_r( $complete_timetable );
+    //         }
         
-        }
+    //     }
         return array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable, 'batches'=> $batches );
     }
     
     
     $faculty_timetable =  get_faculty_timetable();
     $students_with_shortage = get_students_with_shortage();
+    $complete_timetable = get_full_timetable();
 
     $faculty_timetable['students_with_shortage'] = $students_with_shortage;
 
