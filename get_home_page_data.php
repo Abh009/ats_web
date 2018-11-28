@@ -136,7 +136,8 @@
                 $hours = array("0","0","0","0","0","0");
                 $sql = "SELECT * FROM timetable WHERE weekday = $i and branch ='$branch' and sem = '$sem' and batch = '$batch'";
                 $res = $con->query( $sql );
-    
+                
+                $GLOBALS['hours'] = array("0","0","0","0","0","0");
                 while( $timetable = $res->fetch_assoc() ){
                     // removing unwanted fields
                     unset( $timetable['branch']);
