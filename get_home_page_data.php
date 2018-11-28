@@ -138,6 +138,7 @@
                 
                 $GLOBALS['hours'] = array("0","0","0","0","0","0");
                 while( $timetable = $res->fetch_assoc() ){
+                    print_r( $timetable );
                     // removing unwanted fields
                     unset( $timetable['branch']);
                     unset( $timetable['batch']);
