@@ -33,6 +33,7 @@
 
     // create a notification
     $title = "New Assignment on $subject is here";
+    $date_of_subm = date('D d M, Y', strtotime( $date_of_subm ) );
     $content = "There is new assignment on $subject about $topic. It should be submitted on or before $date_of_subm";
     $sql = "INSERT INTO notifications(title, content, branch, sem, batch, faculty_id, date_added) VALUES( '$title', '$content', '$branch', '$sem', '$batch', '$faculty_id', CURDATE() )";
     $result = $con->query( $sql );
