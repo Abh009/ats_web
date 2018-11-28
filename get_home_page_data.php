@@ -207,7 +207,7 @@
     //         }
         
     //     }
-        return array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable, 'batches'=> $batches );
+        return array( 'today'=>$todays_timetable, 'batches'=> $batches );
     }
     
     
@@ -216,6 +216,7 @@
     $complete_timetable = get_full_timetable();
 
     $faculty_timetable['students_with_shortage'] = $students_with_shortage;
+    $faculty_timetable['complete_timetable'] = $complete_timetable;
 
     $con = connect_db();
     // get all notifications too ( datewise )
