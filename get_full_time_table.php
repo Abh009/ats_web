@@ -59,4 +59,5 @@
         }
         return $hours;
     }
+    get_full_timetable();
 ?>
