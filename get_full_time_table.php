@@ -30,7 +30,7 @@
             $branch = $row['branch'];
             $sem = $row['sem'];
             $batch = $row['batch'];
-            $weekday = $row['weekday'];
+            $weekday = (int) $row['weekday'];
             
             unset( $row['weekday']);
             unset( $row['branch']);
