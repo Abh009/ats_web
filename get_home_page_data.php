@@ -70,7 +70,7 @@
         // get today
         $today = (int) date('N');
     
-        $hours = array("0","0","0","0","0","0");
+        $GLOBALS['hours'] = array("0","0","0","0","0","0");
     
         function get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch ){
             foreach( $timetable as $hour=>$sub ){
@@ -106,7 +106,7 @@
             get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
         }
     
-        $todays_timetable = $hours;
+        $todays_timetable = $GLOBALS['hours'];
     
         // get alll batches of this faculty
         $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$regno'";
