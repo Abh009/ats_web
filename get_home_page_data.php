@@ -138,7 +138,6 @@
                 
                 $GLOBALS['hours'] = array("0","0","0","0","0","0");
                 while( $timetable = $res->fetch_assoc() ){
-                    print_r( $timetable );
                     // removing unwanted fields
                     unset( $timetable['branch']);
                     unset( $timetable['batch']);
@@ -149,6 +148,7 @@
                     get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
                 }
                 $complete_timetable[ $i - 1 ] = $GLOBALS['hours'];
+                print_r( $complete_timetable );
             }
         
         }
