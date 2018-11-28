@@ -10,54 +10,51 @@
             return 0;
         }
 
+        $t = { "0", "0", "0", "0", "0" };
+        $subjects = [];
+
+        // get all subjects
         $sql = "SELECT * FROM teaches_at WHERE faculty_id = '$faculty_id'";
         $result = $conn->query( $sql );
 
-        $subjects = array();
         while( $row = $result->fetch_assoc() ){
-            array_push( $subjects, array( 'branch'=>$row['branch'], 'batch'=>$row['batch'], 'sem'=>$row['sem'], 'subject'=>$row['subject']) );
+            array_push( $subjects, $row );
         }
 
+        // get entire time table 
         $sql = "SELECT * FROM timetable";
         $result = $conn->query( $sql );
+        // find my hours from that and fill out t
+        while( $row = $result->fetch_assoc() ){
+            $today = ["0", "0", "0", "0", "0", "0"];
+            $branch = $row['branch'];
+            $sem = $row['sem'];
+            $batch = $row['batch'];
+            $weekday = $row['weekday'];
+            
+            unset( $row['weekday']);
+            unset( $row['branch']);
+            unset( $row['sem']);
+            unset( $row['batch']);
 
-        $full_timetable = array("0", "0", "0", "0", "0" );
-
-        $weekday = 0;
-        while( $timetable = $result->fetch_assoc() ){
-            $day = array( "0", "0", "0", "0", "0", "0" );
-            // removing unwanted fields
-            unset( $timetable['branch']);
-            unset( $timetable['batch']);
-            unset( $timetable['sem']);
-            unset( $timetable['weekday']);
-            // now only hour_1, hour_2, ....
-            foreach( $subjects as $subject ){
-                $x = is_subject_on_this_day( $timetable, $subject );
-                if( ! $x ){
-                    continue;
-                }
-                for( $i = 0; $i < count( $x ); $i++ ){
-                    $h = $x[ $i ];
-                    $day[ $h ] = $subject;
+            foreach( $row as $hour=>$sub ){
+                if( is_in_subjects( $sub, $subjects )){
+                    $h = substr( $hour, -1 );
+                    $today[ $h ] = array( 'branch'=>$branch, 'sem'=>$sem, 'batch'=>$batch, 'subject'=>$subject );
                 }
             }
-            $full_timetable[ $weekday ] = $day;
-            $weekday += 1;
+            $t[ $weekday ] = $today;
         }
+        echo json_encode( $t );
 
-        echo json_encode( $full_timetable );
     }
-
-    function is_subject_on_this_day( $day, $subject ){
-        $hours = array();
-        foreach( $day as $hour=>$sub ){
-            if( $sub == $subject ){
-                $h = substr( $hour, -1 );
-                array_push( $hours, $h );
+    function is_in_subjects( $subject, $subjects ){
+        foreach( $subjects as $sub ){
+            if( $sub['subject'] == $subject ){
+                return true;
             }
         }
-        return $hours;
+        return false;
     }
     get_full_timetable();
 ?>
