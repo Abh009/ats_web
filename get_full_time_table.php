@@ -40,7 +40,7 @@
             foreach( $row as $hour=>$sub ){
                 if( is_in_subjects( $sub, $subjects )){
                     $h = substr( $hour, -1 );
-                    $today[ $h ] = array( 'branch'=>$branch, 'sem'=>$sem, 'batch'=>$batch, 'subject'=>$subject );
+                    $today[ $h ] = array( 'branch'=>$branch, 'sem'=>$sem, 'batch'=>$batch, 'subject'=>$sub );
                 }
             }
             $t[ $weekday ] = $today;
