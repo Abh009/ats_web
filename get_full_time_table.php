@@ -1,5 +1,6 @@
 <?php
-
+    error_reporting(E_ALL); 
+    ini_set('display_errors', 1);
     function get_full_timetable(){
         require('db.php');
         $conn = connect_db();
