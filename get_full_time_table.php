@@ -24,7 +24,7 @@
         $full_timetable = array("0", "0", "0", "0", "0" );
 
         $weekday = 0;
-        while( $row = $result->fetch_assoc() ){
+        while( $timetable = $result->fetch_assoc() ){
             $day = array( "0", "0", "0", "0", "0", "0" );
             // removing unwanted fields
             unset( $timetable['branch']);
@@ -33,7 +33,7 @@
             unset( $timetable['weekday']);
             // now only hour_1, hour_2, ....
             foreach( $subjects as $subject ){
-                $x = is_subject_on_this_day( $row, $subject );
+                $x = is_subject_on_this_day( $timetable, $subject );
                 if( ! $x ){
                     continue;
                 }
