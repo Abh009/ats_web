@@ -147,7 +147,7 @@
                     
                     get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
                 }
-                $complete_timetable[ $i - 1 ] = $hours;
+                $complete_timetable[ $i - 1 ] = $GLOBALS['hours'];
         }
         }
         return array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable, 'batches'=> $batches );
