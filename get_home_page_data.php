@@ -81,7 +81,7 @@
                 }
             }
         }
-    
+
         while( $row = $result->fetch_assoc() ){
             $branch = $row['branch'];
             $sem = $row['sem'];
@@ -133,7 +133,6 @@
     
             // get todays timetable for this batch
             for( $i = 1 ; $i < 6; $i++  ){
-                $hours = array("0","0","0","0","0","0");
                 $sql = "SELECT * FROM timetable WHERE weekday = $i and branch ='$branch' and sem = '$sem' and batch = '$batch'";
                 $res = $con->query( $sql );
                 
@@ -149,7 +148,8 @@
                     get_hours_of_subject( $timetable, $subject, $branch, $sem, $batch );
                 }
                 $complete_timetable[ $i - 1 ] = $GLOBALS['hours'];
-        }
+            }
+        
         }
         return array( 'today'=>$todays_timetable, 'complete_timetable'=>$complete_timetable, 'batches'=> $batches );
     }
